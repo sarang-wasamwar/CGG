@@ -3,5 +3,5 @@ This project is for my Computer Graphics &amp; Gaming subject, where I’m imple
 
 -----
 
-# Why I'm Suggesting to do the Game Development in Python?
+## Why I'm Suggesting to do the Game Development in Python?
 I am Window user since i have laptop and in our college we suppose to work on the Ubuntu our college's all PC have Ubuntu so the problem is not that! The thing is The Program run on Window won't run in the Ubuntu but the Program run on Ubuntu Runs Everywhere! WTH.. 😭
