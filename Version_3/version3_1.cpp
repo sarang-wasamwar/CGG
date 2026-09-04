@@ -5,7 +5,9 @@
 #include <cstdlib>
 #include <ctime>
 #include <cstdio>
+
 using namespace std;
+
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 const double PLAYER_SPEED = 180.0;
@@ -19,6 +21,8 @@ double computer2Position = 80.0;
 double cameraX = 0.0;
 double cameraY = 0.0;
 int score = 0;
+
+// Tranformations
 void multiply(double point[1][3], double T[3][3]) {
     double result[1][3] = {0};
     for (int i = 0; i < 1; i++) {
@@ -34,6 +38,8 @@ void multiply(double point[1][3], double T[3][3]) {
         }
     }
 }
+
+// Translations
 void applyTranslation( double point[1][3], double tx, double ty) {
     double T[3][3] = {
         {1, 0, 0},
@@ -42,12 +48,13 @@ void applyTranslation( double point[1][3], double tx, double ty) {
     };
     multiply(point, T);
 }
+
+// Bresenham's Line Drawing Algo
 void bresenhamLine( int x1, int y1, int x2, int y2, int color) {
-    int dx = abs(x2 - x1);
-    int dy = abs(y2 - y1);
+    int dx = abs(x2 - x1); int dy = abs(y2 - y1);
     int sx = (x1 < x2) ? 1 : -1;
     int sy = (y1 < y2) ? 1 : -1;
-    int err = dx - dy;
+    int err = dx - dy ;
     while (true) {
         if ( x1 >= 0 && x1 < SCREEN_WIDTH && y1 >= 0 && y1 < SCREEN_HEIGHT ) {
             putpixel(x1, y1, color);
@@ -65,12 +72,13 @@ void bresenhamLine( int x1, int y1, int x2, int y2, int color) {
         }
     }
 }
+
+// Bresenham's Cirlce Drawing Algo
 void bresenhamCircle( int xc, int yc, int r, int color ) {
     int x = 0;
     int y = r;
     int d = 3 - 2 * r;
-    while (y >= x)
-    {
+    while (y >= x) {
         putpixel(xc + x, yc + y, color);
         putpixel(xc - x, yc + y, color);
         putpixel(xc + x, yc - y, color);
@@ -89,10 +97,13 @@ void bresenhamCircle( int xc, int yc, int r, int color ) {
         x++;
     }
 }
+
+
 void filledCircle( int x, int y, int radius, int color) {
     setfillstyle( SOLID_FILL, color );
     fillellipse( x, y, radius, radius );
 }
+
 struct Segment {
     double x1;
     double y1;
@@ -101,8 +112,11 @@ struct Segment {
     double length;
     int direction;
 };
+
 const int SEGMENT_COUNT = 8;
 Segment road[SEGMENT_COUNT];
+
+// Layout of Road
 void createRoad() {
     road[0] = { 0, 300, 800, 300, 800, 0 };
     road[1] = { 800, 300, 800, 650, 350, 1 };
@@ -113,6 +127,8 @@ void createRoad() {
     road[6] = { 2500, 650, 3400, 650, 900, 0 };
     road[7] = { 3400, 650, 3400, 250,400, 1 };
 }
+
+// Total Lenght
 double totalRoadLength() {
     double total = 0;
     for (int i = 0; i < SEGMENT_COUNT; i++) {
@@ -120,6 +136,8 @@ double totalRoadLength() {
     }
     return total;
 }
+
+// - Learn this
 void getRoadPosition( double position, double &x, double &y, int &direction) {
     double remaining = position;
     for (int i = 0; i < SEGMENT_COUNT; i++) {
@@ -136,6 +154,8 @@ void getRoadPosition( double position, double &x, double &y, int &direction) {
     y = road[SEGMENT_COUNT - 1].y2;
     direction = road[SEGMENT_COUNT - 1].direction;
 }
+
+// Alloting Positions to Players
 void getPlayerWorldPosition( double position, int lane, double &x, double &y) {
     int direction;
     getRoadPosition( position, x, y, direction );
@@ -152,35 +172,23 @@ void getPlayerWorldPosition( double position, int lane, double &x, double &y) {
         x += offset;
     }
 }
+
+// Check out
 void worldToScreen( double worldX, double worldY, int &screenX, int &screenY) {
     double point[1][3] = { { worldX, worldY, 1 } };
     applyTranslation( point, -cameraX, -cameraY );
     screenX = (int)point[0][0];
     screenY = (int)point[0][1];
 }
-void drawRoadLine(
-    double position1,
-    int offset1,
-    double position2,
-    int offset2,
-    int color)
-{
+
+// Drawing the Road Lines
+void drawRoadLine( double position1, int offset1, double position2, int offset2, int color) {
     double x1, y1;
     double x2, y2;
     int direction1;
     int direction2;
-    getRoadPosition(
-        position1,
-        x1,
-        y1,
-        direction1
-    );
-    getRoadPosition(
-        position2,
-        x2,
-        y2,
-        direction2
-    );
+    getRoadPosition( position1, x1, y1, direction1 );
+    getRoadPosition( position2, x2, y2, direction2 );
     if (direction1 == 0)
         y1 += offset1;
     else
@@ -191,110 +199,36 @@ void drawRoadLine(
         x2 += offset2;
     int sx1, sy1;
     int sx2, sy2;
-    worldToScreen(
-        x1,
-        y1,
-        sx1,
-        sy1
-    );
-    worldToScreen(
-        x2,
-        y2,
-        sx2,
-        sy2
-    );
-    bresenhamLine(
-        sx1,
-        sy1,
-        sx2,
-        sy2,
-        color
-    );
+    worldToScreen( x1, y1, sx1, sy1 );
+    worldToScreen( x2, y2, sx2, sy2 );
+    bresenhamLine( sx1, sy1, sx2, sy2, color );
 }
-void drawRoad()
-{
-    double start =
-        max(
-            0.0,
-            userPosition - 750
-        );
-    double end =
-        min(
-            totalRoadLength(),
-            userPosition + 1200
-        );
-    for (
-        double p = start;
-        p < end;
-        p += 5
-    )
-    {
-        double next =
-            min(
-                p + 5,
-                end
-            );
-        drawRoadLine(
-            p,
-            -ROAD_HALF_WIDTH,
-            next,
-            -ROAD_HALF_WIDTH,
-            LIGHTGRAY
-        );
-        drawRoadLine(
-            p,
-            0,
-            next,
-            0,
-            DARKGRAY
-        );
-        drawRoadLine(
-            p,
-            ROAD_HALF_WIDTH,
-            next,
-            ROAD_HALF_WIDTH,
-            LIGHTGRAY
-        );
+
+// Calling the Road Line to Draw Road together
+void drawRoad() {
+    double start = max( 0.0, userPosition - 750 );
+    double end = min( totalRoadLength(), userPosition + 1200 );
+    for ( double p = start; p < end; p += 5 ) {
+        double next = min( p + 5, end );
+        drawRoadLine( p, -ROAD_HALF_WIDTH, next, -ROAD_HALF_WIDTH, LIGHTGRAY );
+        drawRoadLine( p, 0, next, 0, DARKGRAY );
+        drawRoadLine( p, ROAD_HALF_WIDTH, next, ROAD_HALF_WIDTH, LIGHTGRAY );
     }
 }
-void drawStartLine()
-{
+
+// Start Line
+void drawStartLine() {
     double x;
     double y;
     int direction;
-    getRoadPosition(
-        80,
-        x,
-        y,
-        direction
-    );
+    getRoadPosition( 80, x, y, direction );
     int sx;
     int sy;
-    worldToScreen(
-        x,
-        y,
-        sx,
-        sy
-    );
-    if (direction == 0)
-    {
-        bresenhamLine(
-            sx,
-            sy - ROAD_HALF_WIDTH,
-            sx,
-            sy + ROAD_HALF_WIDTH,
-            GREEN
-        );
-    }
-    else
-    {
-        bresenhamLine(
-            sx - ROAD_HALF_WIDTH,
-            sy,
-            sx + ROAD_HALF_WIDTH,
-            sy,
-            GREEN
-        );
+    worldToScreen( x, y, sx, sy );
+    if (direction == 0) {
+        bresenhamLine( sx, sy - ROAD_HALF_WIDTH, sx, sy + ROAD_HALF_WIDTH, GREEN );
+    } else {
+        bresenhamLine( sx - ROAD_HALF_WIDTH, sy, sx + ROAD_HALF_WIDTH, sy, GREEN );
     }
     setcolor(GREEN);
     settextstyle(
