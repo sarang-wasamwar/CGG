@@ -19,6 +19,46 @@ detection, polygon construction, and clipping.
 The sequence of versions documents how the project developed from individual
 algorithms into a playable game.
 
+## Why I switched from C++/SDL2 to Python/Pygame
+
+The original plan was to build the 2.5D game in C++ with SDL2. C++ was useful
+for learning low-level graphics concepts, but the development setup became a
+source of frustration instead of helping the learning process.
+
+The biggest problem appeared when moving between Windows and Ubuntu. The
+project could behave differently across the two environments, and SDL2
+occasionally caused the game window to freeze on Ubuntu even when the same
+general idea worked on Windows. This was especially frustrating because the
+college computers use Ubuntu, while most of my early development was done on
+Windows. A game that runs on only one machine is not very useful for a
+semester project that needs to be demonstrated and evaluated in different
+environments.
+
+I therefore decided to move the game implementation to Python with Pygame:
+
+- Pygame gave me a simpler and more consistent window and event-loop setup.
+- Python let me iterate on gameplay, levels, AI, and collision logic faster.
+- The project became easier to run on Ubuntu, Windows, and other systems with
+  Python and Pygame installed.
+- Switching languages did not mean abandoning the graphics learning. I
+  reimplemented Bresenham lines, Bresenham circles, flood fill,
+  transformations, and polygon clipping myself.
+- The final code could focus on applying the algorithms to a playable game
+  instead of spending most of the time fighting platform-specific setup and
+  window issues.
+
+This was not a decision that C++ or SDL2 were “bad”. It was a practical
+decision based on the project goals, the available lab environment, and the
+need for reliable cross-platform execution. C++/SDL2 helped me understand the
+lower-level development challenges, while Python/Pygame helped me complete
+and demonstrate the graphics project.
+
+> **The honest lesson:** when the tools become the main obstacle, changing
+> tools can be part of engineering. The important thing is to preserve the
+> learning objective—in this case, implementing and applying the graphics
+> algorithms—not to remain stuck in a setup that prevents the game from being
+> tested.
+
 ## Play the final game
 
 This README is the learning archive; it is not itself an executable game.
