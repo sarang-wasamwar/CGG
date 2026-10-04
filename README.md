@@ -23,7 +23,8 @@ algorithms into a playable game.
 
 This README is the learning archive; it is not itself an executable game.
 To play the completed project, use the separate
-[`fun_race_parkour`](../fun_race_parkour/) repository or clone it from
+[`fun_race_parkour`](https://github.com/sarang-wasamwar/fun_race_parkour)
+repository or clone it from
 [GitHub](https://github.com/sarang-wasamwar/fun_race_parkour).
 
 ### Run it locally
@@ -40,7 +41,7 @@ python main.py
 The final game includes the playable race, three levels, AI opponents, coins,
 moving barriers, speed bumps, checkpoints, results screens, and the
 interactive Graphics Algorithms Demo. See the
-[`fun_race_parkour README`](../fun_race_parkour/README.md) for controls and
+[`fun_race_parkour README`](https://github.com/sarang-wasamwar/fun_race_parkour#readme) for controls and
 the full setup guide.
 
 ## Choose your route
@@ -51,7 +52,7 @@ the full setup guide.
 | Understand the mathematics | [Version 3](#version-3---transformations-world-coordinates-and-a-moving-camera) |
 | See when the game became complete | [Version 4](#version-4---a-complete-c-racing-game) |
 | Explore the final implementation | [Final game](#final-game-repository-fun_race_parkour) |
-| See the algorithms running live | [`demo.py`](../fun_race_parkour/src/demo.py) |
+| See the algorithms running live | [`demo.py`](https://github.com/sarang-wasamwar/fun_race_parkour/blob/main/src/demo.py) |
 
 ### Semester progress bar
 
@@ -343,7 +344,8 @@ more portable, modular, and demonstrable game implementation.
 ## Final game repository: `fun_race_parkour`
 
 The final, properly organized game is available in the
-[`fun_race_parkour`](../fun_race_parkour/) repository folder. It is also
+[`fun_race_parkour`](https://github.com/sarang-wasamwar/fun_race_parkour)
+repository. It is also
 available online at
 [github.com/sarang-wasamwar/fun_race_parkour](https://github.com/sarang-wasamwar/fun_race_parkour).
 This project is the polished continuation of the experiments in Versions 1 to
@@ -373,7 +375,7 @@ fun_race_parkour/
 
 For installation, controls, gameplay instructions, project structure, and the
 full graphics explanation, read the dedicated
-[`fun_race_parkour/README.md`](../fun_race_parkour/README.md).
+[`fun_race_parkour README`](https://github.com/sarang-wasamwar/fun_race_parkour#readme).
 
 - Three data-driven levels: Easy, Medium, and Hard.
 - A player racer competing against two AI racers.
@@ -423,15 +425,17 @@ interface systems.
 Do not read this project only from top to bottom. Use it like a small
 exploration guide:
 
-- [ ] Open the final [`fun_race_parkour`](../fun_race_parkour/) repository.
+- [ ] Open the final
+      [`fun_race_parkour`](https://github.com/sarang-wasamwar/fun_race_parkour)
+      repository.
 - [ ] Run the game and complete one level.
 - [ ] Collect a coin and observe the score change.
 - [ ] Hit a moving barrier and observe the checkpoint recovery.
 - [ ] Open the **Graphics Algorithms Demo** from the main menu.
 - [ ] Compare one algorithm demo with its original implementation in
-      [`graphics_algorithms.py`](../fun_race_parkour/src/graphics_algorithms.py).
+      [`graphics_algorithms.py`](https://github.com/sarang-wasamwar/fun_race_parkour/blob/main/src/graphics_algorithms.py).
 - [ ] Inspect polygon clipping in
-      [`clipping.py`](../fun_race_parkour/src/clipping.py).
+      [`clipping.py`](https://github.com/sarang-wasamwar/fun_race_parkour/blob/main/src/clipping.py).
 - [ ] Return to the version folders and identify where that feature first
       appeared.
 
@@ -447,7 +451,8 @@ exploration guide:
 4. Read [`Version_4`](Version_4/) and find the update functions for racers,
    obstacles, coins, and AI.
 5. Finish with [`Version_5`](Version_5/) and the final
-   [`fun_race_parkour`](../fun_race_parkour/) implementation.
+   [`fun_race_parkour`](https://github.com/sarang-wasamwar/fun_race_parkour)
+   implementation.
 
 </details>
 
