@@ -19,6 +19,30 @@ detection, polygon construction, and clipping.
 The sequence of versions documents how the project developed from individual
 algorithms into a playable game.
 
+## Play the final game
+
+This README is the learning archive; it is not itself an executable game.
+To play the completed project, use the separate
+[`fun_race_parkour`](../fun_race_parkour/) repository or clone it from
+[GitHub](https://github.com/sarang-wasamwar/fun_race_parkour).
+
+### Run it locally
+
+```powershell
+git clone https://github.com/sarang-wasamwar/fun_race_parkour.git
+cd fun_race_parkour
+py -3 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python main.py
+```
+
+The final game includes the playable race, three levels, AI opponents, coins,
+moving barriers, speed bumps, checkpoints, results screens, and the
+interactive Graphics Algorithms Demo. See the
+[`fun_race_parkour README`](../fun_race_parkour/README.md) for controls and
+the full setup guide.
+
 ## Choose your route
 
 | If you want to... | Start here |
@@ -319,8 +343,11 @@ more portable, modular, and demonstrable game implementation.
 ## Final game repository: `fun_race_parkour`
 
 The final, properly organized game is available in the
-[`fun_race_parkour`](../fun_race_parkour/) repository folder. This project is
-the polished continuation of the experiments in Versions 1 to 5.
+[`fun_race_parkour`](../fun_race_parkour/) repository folder. It is also
+available online at
+[github.com/sarang-wasamwar/fun_race_parkour](https://github.com/sarang-wasamwar/fun_race_parkour).
+This project is the polished continuation of the experiments in Versions 1 to
+5.
 
 Unlike the earlier milestone files, the final repository is organized as a
 modular Pygame application:
@@ -343,6 +370,10 @@ fun_race_parkour/
 ```
 
 ### What the final game includes
+
+For installation, controls, gameplay instructions, project structure, and the
+full graphics explanation, read the dedicated
+[`fun_race_parkour/README.md`](../fun_race_parkour/README.md).
 
 - Three data-driven levels: Easy, Medium, and Hard.
 - A player racer competing against two AI racers.
